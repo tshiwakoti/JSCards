@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deck Cards</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="deckCards.js"></script>
+  <style type="text/css">
+  body {
+    background-color: lightgrey;
+  }
+  </style>
+  <script type="text/javascript">
+    function showDeck(deck) {
+      $('#deck').html('');
+      for (card in deck.cards) {
+        $('#deck').append('<img src="'+deck.cards[card].suit+deck.cards[card].rank+'.png">');
+      }
+    }
+
+    function showHand(player) {
+      $('#hand').html('');
+      for (card in player.hand) {
+        $('#hand').append('<img src="'+player.hand[card].suit+player.hand[card].rank+'.png">');
+      }
+    }
+
+  $(document).ready( function () {
+    var deck = new Deck();
+    var player = new Player('Tej', deck);
+
+    showDeck(deck);
+
+    $('#reset').click( function () {
+      deck.reset();
+      showDeck(deck);
+    });
+
+    $('#draw').click( function () {
+      player.draw();
+      showDeck(deck);
+      showHand(player);
+      console.log(player);
+    })
+
+  })
+  </script>
+</head>
+<body>
+<div id="deck"></div>
+<button id="reset">Reset</button>
+<button id="draw">Draw</button>
+<div id="hand"></div>
+</body>
+</html>
